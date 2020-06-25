@@ -18,8 +18,10 @@ import javax.swing.SwingConstants;
 //import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
-public class ReceptiPrikaz extends JFrame {
-	public ReceptiPrikaz() {
+public class ReceptiPrikaz extends JFrame 
+{
+	public ReceptiPrikaz() 
+	{
 		super();
 		setTitle("OISISI-2020-TIM-14");
 		setSize(1300, 800);
