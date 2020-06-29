@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-//import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -17,15 +16,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.table.TableColumnModel;
 
-public class ReceptiPrikaz extends JFrame {
-	public ReceptiPrikaz() {
+public class ReceptiKreiranje extends JFrame {
+	public ReceptiKreiranje() {
 		super();
 		setTitle("OISISI-2020-TIM-14");
 		setSize(1300, 800);
@@ -126,12 +125,12 @@ public class ReceptiPrikaz extends JFrame {
 		btnOdjava.setBackground(new Color(106, 183, 139));
 
 		odjava.add(btnOdjava);
-	
+
 		naslov.add(labelaRecepti, BorderLayout.WEST);
 		naslov.add(odjava, BorderLayout.EAST);
 
 		JPanel recepti = new JPanel();
-		//recepti.setPreferredSize(null);
+		// recepti.setPreferredSize(null);
 		recepti.setBackground(new Color(230, 255, 251));
 		GridLayout receptiLayout = new GridLayout(1, 3);
 		receptiLayout.setHgap(150);
@@ -152,110 +151,145 @@ public class ReceptiPrikaz extends JFrame {
 		btn8.setBackground(new Color(230, 255, 251));
 		recepti.add(btn8);
 
-		JPanel sortiranje = new JPanel();
-		sortiranje.setLayout(new BorderLayout());
-		sortiranje.setBackground(new Color(230, 255, 251));
-		
-		JPanel sortirajPanel = new JPanel();
-		JLabel lblSort = new JLabel("Sortiraj po :");
-		//sortirajPanel.setPreferredSize(null);
-		sortirajPanel.setBackground(new Color(230, 255, 251));
-		lblSort.setFont(new Font("Ariel", 0, 25));
-		sortirajPanel.add(lblSort);
-
-		JPanel raddioButtons = new JPanel();
-		GridLayout raddioLayout = new GridLayout(1, 3);
-		raddioLayout.setHgap(2);
-		raddioButtons.setBackground(new Color(230, 255, 251));
-		raddioButtons.setLayout(raddioLayout);
-		
-		JRadioButton radBtn1 = new JRadioButton("Sifri");
-		radBtn1.setFont(new Font("Arial", 0, 23));
-		radBtn1.setBackground(new Color(230, 255, 251));
-
-		JRadioButton radBtn2 = new JRadioButton("Lekaru");
-		radBtn2.setFont(new Font("Arial", 0, 23));
-		radBtn2.setBackground(new Color(230, 255, 251));
-
-		JRadioButton radBtn3 = new JRadioButton("Datumu");
-		radBtn3.setFont(new Font("Arial", 0, 23));
-		radBtn3.setBackground(new Color(230, 255, 251));
-
-		ButtonGroup sortirajPo = new ButtonGroup( );
-
-		sortirajPo.add(radBtn1);
-		sortirajPo.add(radBtn2);
-		sortirajPo.add(radBtn3);
-			
-		String radioText = "";
-			
-		if (radBtn1.isSelected()) {radioText = radBtn1.getText(); }
-		if (radBtn2.isSelected()) {radioText = radBtn2.getText(); }
-		if (radBtn3.isSelected()) {radioText = radBtn3.getText(); }
-		
-		raddioButtons.add(radBtn1);
-		raddioButtons.add(radBtn2);
-		raddioButtons.add(radBtn3);
-
-		sortiranje.add(sortirajPanel, BorderLayout.WEST);
-//		sortiranje.add(raddioButtons, BorderLayout.CENTER);
-		sortiranje.add(raddioButtons);
-		
-//		menuPan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		menuPan.add(naslov, BorderLayout.NORTH);
 		menuPan.add(recepti, BorderLayout.CENTER);
-		menuPan.add(sortiranje, BorderLayout.SOUTH);
 
-//		panCenter.add(menuPan);
-
-		JPanel tablePan = new JPanel();
-		tablePan.setBackground(new Color(230, 255, 251));
+		JPanel formPanel = new JPanel();
+		formPanel.setBackground(new Color(230, 255, 251));
 
 		panCenter.add(menuPan, BorderLayout.NORTH);
-		panCenter.add(tablePan, BorderLayout.CENTER);
+		panCenter.add(formPanel, BorderLayout.CENTER);
 
 		// add(panCenter);
 
-		showTablePanel(tablePan);
+		showFormPanel(formPanel);
 	}
 
-	/**
-	 * main window table
-	 */
+	private void showFormPanel(JPanel formPanel) {
+		JPanel paramPan = new JPanel();
+		paramPan.setBackground(new Color(230, 255, 251));
+		paramPan.setLayout(new BorderLayout());
 
-	private void showTablePanel(JPanel tablePan) {
-		String column[] = { "Sifra", "Lekar", "Datum i vreme" };
-		String data[][] = { { "1021145", "Petar Arsic", "06.03.2020.  14:49" },
-				{ "1325153", "Tijana Matic", "24.05.2020.  07:51" },
-				{ "1749372", "Sara Simovic", "22.07.2019.  15:27" },
-				{ "2149375", "Marija Jovanovic", "08.06.2020.  11:31" },
-				{ "2619384", "Pavle Vojvodic", "18.08.2019.  12:20" },
-				{ "2857193", "Marina Vukotic", "28.04.2020.  18:06" },
-				{ "3026210", "Sara Nedovic", "24.08.2019.  16:12" }, 
-				{ "3321875", "Petar Arsic", "13.02.2020.  13:36" },
-				{ "3325483", "Vasilije Ilic", "15.05.2020.  11:08" },
-				{ "5193728", "Aleksandar Maric", "14.09.2019.  17:19" },
-				{ "5418673", "Igor Janjic", "30.10.2019.  19:25" },
-				{ "5974216", "Aleksandar Petrovic", "31.03.2020.  20:43" },
-				{ "6538147", "Milan Adamovic", "24.11.2019.  09:16" },
-				{ "6724933", "Pavle Savic", "07.02.2020.  10:52" },
-				{ "6967825", "Helena Velickovic", "01.04.2020.  23:30" },
-				{ "8468571", "Marija Jovanovic", "27.01.2020.  23:55" } };
+		JPanel parameterTextPan = new JPanel();
+		parameterTextPan.setBackground(new Color(250, 255, 251));
+		BoxLayout parameterTextPanGlue = new BoxLayout(parameterTextPan, BoxLayout.Y_AXIS);
+		parameterTextPan.setLayout(parameterTextPanGlue);
+		parameterTextPan.add(Box.createGlue());
 
-		JTable table = new JTable(data, column);
-		table.setRowHeight(40);	
-		table.setFont(new Font("Verdana", Font.PLAIN, 17));
-		
-		JScrollPane scroll = new JScrollPane(table);
-	    scroll.setPreferredSize(new Dimension(1100, 500));
-    
-		TableColumnModel columnModel = table.getColumnModel();
-		columnModel.getColumn(0).setPreferredWidth(100);
-		columnModel.getColumn(1).setPreferredWidth(600);
-		columnModel.getColumn(2).setPreferredWidth(150);
-		
-		tablePan.add(scroll);
-//		tablePan.add(table, BorderLayout.SOUTH);
+		JPanel parameterPan1 = new JPanel();
+		parameterPan1.setBackground(new Color(230, 255, 251));
+		JLabel JMBGLabel = new JLabel(" JMBG pacijenta :");
+		JMBGLabel.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea1 = new JTextField(30);
+		textArea1.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan1.add(JMBGLabel);
+		parameterPan1.add(textArea1);
+		parameterTextPan.add(parameterPan1);
+
+		JPanel parameterPan2 = new JPanel();
+		parameterPan2.setBackground(new Color(230, 255, 251));
+		JLabel datePan = new JLabel("Datum izdavanja :");
+		datePan.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea2 = new JTextField(30);
+		textArea2.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan2.add(datePan);
+		parameterPan2.add(textArea2);
+		parameterTextPan.add(parameterPan2);
+
+		JPanel parameterPan3 = new JPanel();
+		parameterPan3.setBackground(new Color(230, 255, 251));
+		JLabel timePan = new JLabel("  Vreme kreiranja :");
+		timePan.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea3 = new JTextField(30);
+		textArea3.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan3.add(timePan);
+		parameterPan3.add(textArea3);
+		parameterTextPan.add(parameterPan3);
+
+		JPanel parameterPan4 = new JPanel();
+		parameterPan4.setBackground(new Color(230, 255, 251));
+		JLabel passwordPan = new JLabel("             Sifra leka :");
+		passwordPan.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea4 = new JTextField(30);
+		textArea4.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan4.add(passwordPan);
+		parameterPan4.add(textArea4);
+		parameterTextPan.add(parameterPan4);
+
+		JPanel parameterPan5 = new JPanel();
+		parameterPan5.setBackground(new Color(230, 255, 251));
+		JLabel quantityPan = new JLabel("       Kolicina leka :");
+		quantityPan.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea5 = new JTextField(30);
+		textArea5.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan5.add(quantityPan);
+		parameterPan5.add(textArea5);
+		parameterTextPan.add(parameterPan5);
+
+		// formPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		JPanel parameterPan6 = new JPanel();
+		parameterPan6.setBackground(new Color(230, 255, 251));
+		JLabel medicinePasswordPan = new JLabel("       Sifra recepta :");
+		medicinePasswordPan.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea6 = new JTextField(30);
+		textArea6.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan6.add(medicinePasswordPan);
+		parameterPan6.add(textArea6);
+		parameterTextPan.add(parameterPan6);
+
+		JPanel parameterPan7 = new JPanel();
+		parameterPan7.setBackground(new Color(230, 255, 251));
+		JLabel doctorPasswordPan = new JLabel("         Sifra lekara :");
+		doctorPasswordPan.setFont(new Font("Ariel", 0, 30));
+
+		JTextField textArea7 = new JTextField(30);
+		textArea7.setFont(new Font("Serif", Font.ITALIC, 16));
+
+		parameterPan7.add(doctorPasswordPan);
+		parameterPan7.add(textArea7);
+		parameterTextPan.add(parameterPan7);
+
+		JPanel btns = new JPanel();
+		btns.setBackground(new Color(230, 255, 251));
+
+		JPanel btn1 = new JPanel();
+		btn1.setBackground(new Color(230, 255, 251));
+		JButton btnPrh = new JButton("Prihvati");
+		btnPrh.setFont(new Font("Arial", 0, 30));
+		btnPrh.setBackground(new Color(0, 204, 255));
+
+		btn1.add(btnPrh);
+
+		JPanel btn2 = new JPanel();
+		btn2.setBackground(new Color(230, 255, 251));
+		JButton btnOdb = new JButton("Odbij");
+		btnOdb.setFont(new Font("Arial", 0, 30));
+		btnOdb.setBackground(new Color(255, 55, 0));
+
+		btn2.add(btnOdb);
+
+		btns.add(btn1);
+		btns.add(btn2);
+
+		btns.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		paramPan.add(parameterTextPan, BorderLayout.WEST);
+		paramPan.add(btns, BorderLayout.SOUTH);
+		formPanel.add(paramPan);
+
 	}
 
 }

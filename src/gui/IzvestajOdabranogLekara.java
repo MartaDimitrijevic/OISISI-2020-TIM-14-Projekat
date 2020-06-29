@@ -20,12 +20,17 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
 
-public class ReceptiPrikaz extends JFrame {
-	public ReceptiPrikaz() {
+public class IzvestajOdabranogLekara extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	public IzvestajOdabranogLekara() {
 		super();
 		setTitle("OISISI-2020-TIM-14");
 		setSize(1300, 800);
@@ -103,7 +108,6 @@ public class ReceptiPrikaz extends JFrame {
 		menuPan.setLayout(menuPanelGlue);
 		menuPan.setBackground(new Color(230, 255, 251));
 		menuPan.setPreferredSize(new Dimension(20, 180));
-//		panCenter.add(menuPan, BorderLayout.NORTH);
 		menuPan.add(Box.createGlue());
 
 		JPanel naslov = new JPanel();
@@ -111,7 +115,7 @@ public class ReceptiPrikaz extends JFrame {
 		naslov.setBackground(new Color(230, 255, 251));
 
 		JPanel labelaRecepti = new JPanel();
-		JLabel lblTop = new JLabel("Recepti");
+		JLabel lblTop = new JLabel("Izvestaj");
 		labelaRecepti.setBackground(new Color(230, 255, 251));
 		lblTop.setFont(new Font("Ariel", 0, 55));
 		labelaRecepti.add(lblTop);
@@ -126,136 +130,134 @@ public class ReceptiPrikaz extends JFrame {
 		btnOdjava.setBackground(new Color(106, 183, 139));
 
 		odjava.add(btnOdjava);
-	
+
 		naslov.add(labelaRecepti, BorderLayout.WEST);
 		naslov.add(odjava, BorderLayout.EAST);
 
-		JPanel recepti = new JPanel();
-		//recepti.setPreferredSize(null);
-		recepti.setBackground(new Color(230, 255, 251));
+		JPanel ukuProdLek = new JPanel();
+		// recepti.setPreferredSize(null);
+		ukuProdLek.setBackground(new Color(230, 255, 251));
+//		recepti.setLayout(new FlowLayout(FlowLayout.CENTER));
 		GridLayout receptiLayout = new GridLayout(1, 3);
-		receptiLayout.setHgap(150);
-		recepti.setLayout(receptiLayout);
+		receptiLayout.setHgap(20);
+		ukuProdLek.setLayout(receptiLayout);
 
-		JButton btn6 = new JButton("Prikaz recepata");
-		btn6.setFont(new Font("Arial", 0, 30));
+		JButton btn6 = new JButton();
+		btn6.setText("<html> <center> Ukupna prodaja <br> svih lekova </center> </html> \n");
+		btn6.setFont(new Font("Arial", 0, 20));
 		btn6.setBackground(new Color(230, 255, 251));
-		recepti.add(btn6);
+		ukuProdLek.add(btn6);
 
-		JButton btn7 = new JButton("Pretraga recepata");
-		btn7.setFont(new Font("Arial", 0, 30));
+		JButton btn7 = new JButton();
+		btn7.setText("<html> <center> Ukupna prodaja svih <br> lekova odabranog proizvodjaca </center> </html> \n");
+		btn7.setFont(new Font("Arial", 0, 20));
 		btn7.setBackground(new Color(230, 255, 251));
-		recepti.add(btn7);
+		ukuProdLek.add(btn7);
 
-		JButton btn8 = new JButton("Kreirati novi recept");
-		btn8.setFont(new Font("Arial", 0, 30));
+		JButton btn8 = new JButton();
+		btn8.setText(
+				"<html> <center> Ukupna prodaja svih lekova koje <br> je odabrani apotekar prodao </center> </html> \n");
+		btn8.setFont(new Font("Arial", 0, 20));
 		btn8.setBackground(new Color(230, 255, 251));
-		recepti.add(btn8);
+		ukuProdLek.add(btn8);
 
-		JPanel sortiranje = new JPanel();
-		sortiranje.setLayout(new BorderLayout());
-		sortiranje.setBackground(new Color(230, 255, 251));
-		
-		JPanel sortirajPanel = new JPanel();
-		JLabel lblSort = new JLabel("Sortiraj po :");
-		//sortirajPanel.setPreferredSize(null);
-		sortirajPanel.setBackground(new Color(230, 255, 251));
-		lblSort.setFont(new Font("Ariel", 0, 25));
-		sortirajPanel.add(lblSort);
-
-		JPanel raddioButtons = new JPanel();
-		GridLayout raddioLayout = new GridLayout(1, 3);
-		raddioLayout.setHgap(2);
-		raddioButtons.setBackground(new Color(230, 255, 251));
-		raddioButtons.setLayout(raddioLayout);
-		
-		JRadioButton radBtn1 = new JRadioButton("Sifri");
-		radBtn1.setFont(new Font("Arial", 0, 23));
-		radBtn1.setBackground(new Color(230, 255, 251));
-
-		JRadioButton radBtn2 = new JRadioButton("Lekaru");
-		radBtn2.setFont(new Font("Arial", 0, 23));
-		radBtn2.setBackground(new Color(230, 255, 251));
-
-		JRadioButton radBtn3 = new JRadioButton("Datumu");
-		radBtn3.setFont(new Font("Arial", 0, 23));
-		radBtn3.setBackground(new Color(230, 255, 251));
-
-		ButtonGroup sortirajPo = new ButtonGroup( );
-
-		sortirajPo.add(radBtn1);
-		sortirajPo.add(radBtn2);
-		sortirajPo.add(radBtn3);
-			
-		String radioText = "";
-			
-		if (radBtn1.isSelected()) {radioText = radBtn1.getText(); }
-		if (radBtn2.isSelected()) {radioText = radBtn2.getText(); }
-		if (radBtn3.isSelected()) {radioText = radBtn3.getText(); }
-		
-		raddioButtons.add(radBtn1);
-		raddioButtons.add(radBtn2);
-		raddioButtons.add(radBtn3);
-
-		sortiranje.add(sortirajPanel, BorderLayout.WEST);
-//		sortiranje.add(raddioButtons, BorderLayout.CENTER);
-		sortiranje.add(raddioButtons);
-		
-//		menuPan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		menuPan.add(naslov, BorderLayout.NORTH);
-		menuPan.add(recepti, BorderLayout.CENTER);
-		menuPan.add(sortiranje, BorderLayout.SOUTH);
+		menuPan.add(ukuProdLek, BorderLayout.CENTER);
 
-//		panCenter.add(menuPan);
-
-		JPanel tablePan = new JPanel();
-		tablePan.setBackground(new Color(230, 255, 251));
+		JPanel tableSearchPan = new JPanel();
+		tableSearchPan.setBackground(new Color(230, 255, 251));
 
 		panCenter.add(menuPan, BorderLayout.NORTH);
-		panCenter.add(tablePan, BorderLayout.CENTER);
+		panCenter.add(tableSearchPan, BorderLayout.CENTER);
 
-		// add(panCenter);
+		tableSearchPan.setLayout(new BorderLayout());
 
-		showTablePanel(tablePan);
+		showTablePanel(tableSearchPan);
 	}
 
 	/**
 	 * main window table
 	 */
 
-	private void showTablePanel(JPanel tablePan) {
-		String column[] = { "Sifra", "Lekar", "Datum i vreme" };
-		String data[][] = { { "1021145", "Petar Arsic", "06.03.2020.  14:49" },
-				{ "1325153", "Tijana Matic", "24.05.2020.  07:51" },
-				{ "1749372", "Sara Simovic", "22.07.2019.  15:27" },
-				{ "2149375", "Marija Jovanovic", "08.06.2020.  11:31" },
-				{ "2619384", "Pavle Vojvodic", "18.08.2019.  12:20" },
-				{ "2857193", "Marina Vukotic", "28.04.2020.  18:06" },
-				{ "3026210", "Sara Nedovic", "24.08.2019.  16:12" }, 
-				{ "3321875", "Petar Arsic", "13.02.2020.  13:36" },
-				{ "3325483", "Vasilije Ilic", "15.05.2020.  11:08" },
-				{ "5193728", "Aleksandar Maric", "14.09.2019.  17:19" },
-				{ "5418673", "Igor Janjic", "30.10.2019.  19:25" },
-				{ "5974216", "Aleksandar Petrovic", "31.03.2020.  20:43" },
-				{ "6538147", "Milan Adamovic", "24.11.2019.  09:16" },
-				{ "6724933", "Pavle Savic", "07.02.2020.  10:52" },
-				{ "6967825", "Helena Velickovic", "01.04.2020.  23:30" },
-				{ "8468571", "Marija Jovanovic", "27.01.2020.  23:55" } };
+	private void showTablePanel(JPanel tableSearchPan) {
 
-		JTable table = new JTable(data, column);
-		table.setRowHeight(40);	
+		JPanel searchPan = new JPanel();
+		searchPan.setBackground(new Color(230, 255, 251));
+		JLabel srcApot = new JLabel("Apotekar:");
+		srcApot.setFont(new Font("Ariel", 0, 20));
+		searchPan.add(srcApot);
+		// searchPan.setPreferredSize(new Dimension(20, 180));
+		JTextField searchTxt = new JTextField(30);
+		searchTxt.setFont(new Font("Ariel", 0, 20));
+		searchPan.setLayout(new FlowLayout(FlowLayout.LEFT));
+		searchPan.add(searchTxt);
+		JTable table;
+
+		JPanel tablePan = new JPanel();
+		tablePan.setBackground(new Color(230, 255, 251));
+
+		Object column[] = { "Ime", "Sifra", "Proizvodjac", "Recept", "Cena", "Kolicina", "Zarada" };
+		Object data[][] = { { "Andol", "BR3348G", "Pliva a.d.", false, "220 RSD", "17", "" },
+				{ "Omeprazol", "A02BC01", "Zdravlje a.d.", false, "350 RSD", "7", "" },
+				{ "Riftan", "A07AA09", "HEMOFARM A.D.", true, "720 RSD", "3", "" },
+				{ "Vesicare", "G04BD08", "Astellas d.o.o.", false, "1,545 RSD", "2", "" },
+				{ "Serlift", "NO6AB06", "Medico Uno", false, "354 RSD", "8", "" },
+				{ "Itanem", "J01DHO2", "GALENIKA A.D.", false, "6,552 RSD", "4", "" },
+				{ "Brufen", "M01AE01", "HEMOFARM A.D.", false, "172 RSD", "25", "" },
+				{ "Kafetin", "N02BE51", "ALKALOD A.D.", false, "205 RSD", "39", "" },
+				{ "Alfacet", "D07AC13", "GALENIKA A.D.", true, "863 RDS", "12", "" },
+				{ "Glikosan", "R06AX27", "Slaviamed a.d.", true, "220 RSD", "6", "" },
+				{ "Amoksicilin", "J01CA04 ", "FARMALOGIST D.O.O.", false, "145 RSD", "6", "" },
+				{ "Nexium", "A02BC05", "AastraZeneca d.o.o.", false, "500 RSD", "14", "" },
+				{ "Logest", "G03AA10", "BAYER D.O.O.", "", "478 RSD", false, "11", "" },
+
+		};
+
+		DefaultTableModel model = new DefaultTableModel(data, column);
+
+		table = new JTable(model) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Class getColumnClass(int column) {
+				switch (column) {
+				case 0:
+					return String.class;
+				case 1:
+					return String.class;
+				case 2:
+					return String.class;
+				case 3:
+					return Boolean.class;
+				case 4:
+					return String.class;
+				case 5:
+					return String.class;
+				default:
+					return String.class;
+				}
+			}
+		};
+		table.setRowHeight(40);
 		table.setFont(new Font("Verdana", Font.PLAIN, 17));
-		
+
 		JScrollPane scroll = new JScrollPane(table);
-	    scroll.setPreferredSize(new Dimension(1100, 500));
-    
+		scroll.setPreferredSize(new Dimension(1100, 450));
+
 		TableColumnModel columnModel = table.getColumnModel();
-		columnModel.getColumn(0).setPreferredWidth(100);
-		columnModel.getColumn(1).setPreferredWidth(600);
-		columnModel.getColumn(2).setPreferredWidth(150);
-		
+		columnModel.getColumn(0).setPreferredWidth(300);
+		columnModel.getColumn(1).setPreferredWidth(300);
+		columnModel.getColumn(2).setPreferredWidth(200);
+		columnModel.getColumn(3).setPreferredWidth(80);
+		columnModel.getColumn(4).setPreferredWidth(150);
+		columnModel.getColumn(5).setPreferredWidth(150);
+		columnModel.getColumn(6).setPreferredWidth(150);
+
 		tablePan.add(scroll);
-//		tablePan.add(table, BorderLayout.SOUTH);
+
+		tableSearchPan.add(searchPan, BorderLayout.PAGE_START);
+		tableSearchPan.add(tablePan, BorderLayout.CENTER);
 	}
 
 }

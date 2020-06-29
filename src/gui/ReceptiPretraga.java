@@ -20,12 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableColumnModel;
 
-public class ReceptiPrikaz extends JFrame {
-	public ReceptiPrikaz() {
+public class ReceptiPretraga extends JFrame{
+	public ReceptiPretraga() {
 		super();
 		setTitle("OISISI-2020-TIM-14");
 		setSize(1300, 800);
@@ -115,7 +116,7 @@ public class ReceptiPrikaz extends JFrame {
 		labelaRecepti.setBackground(new Color(230, 255, 251));
 		lblTop.setFont(new Font("Ariel", 0, 55));
 		labelaRecepti.add(lblTop);
-
+		
 		labelaRecepti.setLayout(new FlowLayout(FlowLayout.LEFT));
 		labelaRecepti.add(lblTop);
 
@@ -126,13 +127,14 @@ public class ReceptiPrikaz extends JFrame {
 		btnOdjava.setBackground(new Color(106, 183, 139));
 
 		odjava.add(btnOdjava);
-	
+		
 		naslov.add(labelaRecepti, BorderLayout.WEST);
 		naslov.add(odjava, BorderLayout.EAST);
 
 		JPanel recepti = new JPanel();
 		//recepti.setPreferredSize(null);
 		recepti.setBackground(new Color(230, 255, 251));
+//		recepti.setLayout(new FlowLayout(FlowLayout.CENTER));
 		GridLayout receptiLayout = new GridLayout(1, 3);
 		receptiLayout.setHgap(150);
 		recepti.setLayout(receptiLayout);
@@ -152,19 +154,19 @@ public class ReceptiPrikaz extends JFrame {
 		btn8.setBackground(new Color(230, 255, 251));
 		recepti.add(btn8);
 
-		JPanel sortiranje = new JPanel();
-		sortiranje.setLayout(new BorderLayout());
-		sortiranje.setBackground(new Color(230, 255, 251));
+		JPanel pretraga = new JPanel();
+		pretraga.setLayout(new BorderLayout());
+		pretraga.setBackground(new Color(230, 255, 251));
 		
-		JPanel sortirajPanel = new JPanel();
-		JLabel lblSort = new JLabel("Sortiraj po :");
-		//sortirajPanel.setPreferredSize(null);
-		sortirajPanel.setBackground(new Color(230, 255, 251));
-		lblSort.setFont(new Font("Ariel", 0, 25));
-		sortirajPanel.add(lblSort);
+		JPanel pretragaPanel = new JPanel();
+		JLabel lblPretraga = new JLabel("Pretraga po :");
+		//pretragaPanel.setPreferredSize(null);
+		pretragaPanel.setBackground(new Color(230, 255, 251));
+		lblPretraga.setFont(new Font("Ariel", 0, 25));
+		pretragaPanel.add(lblPretraga);
 
 		JPanel raddioButtons = new JPanel();
-		GridLayout raddioLayout = new GridLayout(1, 3);
+		GridLayout raddioLayout = new GridLayout(1, 4);
 		raddioLayout.setHgap(2);
 		raddioButtons.setBackground(new Color(230, 255, 251));
 		raddioButtons.setLayout(raddioLayout);
@@ -177,85 +179,108 @@ public class ReceptiPrikaz extends JFrame {
 		radBtn2.setFont(new Font("Arial", 0, 23));
 		radBtn2.setBackground(new Color(230, 255, 251));
 
-		JRadioButton radBtn3 = new JRadioButton("Datumu");
+		JRadioButton radBtn3 = new JRadioButton("JMBG");
 		radBtn3.setFont(new Font("Arial", 0, 23));
 		radBtn3.setBackground(new Color(230, 255, 251));
+		
+		JRadioButton radBtn4 = new JRadioButton("Leku");
+		radBtn4.setFont(new Font("Arial", 0, 23));
+		radBtn4.setBackground(new Color(230, 255, 251));
+		
+		ButtonGroup pretragaPo = new ButtonGroup( );
 
-		ButtonGroup sortirajPo = new ButtonGroup( );
-
-		sortirajPo.add(radBtn1);
-		sortirajPo.add(radBtn2);
-		sortirajPo.add(radBtn3);
+		pretragaPo.add(radBtn1);
+		pretragaPo.add(radBtn2);
+		pretragaPo.add(radBtn3);
+		pretragaPo.add(radBtn4);
 			
 		String radioText = "";
 			
 		if (radBtn1.isSelected()) {radioText = radBtn1.getText(); }
 		if (radBtn2.isSelected()) {radioText = radBtn2.getText(); }
 		if (radBtn3.isSelected()) {radioText = radBtn3.getText(); }
+		if (radBtn4.isSelected()) {radioText = radBtn4.getText(); }
 		
 		raddioButtons.add(radBtn1);
 		raddioButtons.add(radBtn2);
 		raddioButtons.add(radBtn3);
-
-		sortiranje.add(sortirajPanel, BorderLayout.WEST);
-//		sortiranje.add(raddioButtons, BorderLayout.CENTER);
-		sortiranje.add(raddioButtons);
+		raddioButtons.add(radBtn4);
+		
+		pretraga.add(pretragaPanel, BorderLayout.WEST);
+//		pretraga.add(raddioButtons, BorderLayout.CENTER);
+		pretraga.add(raddioButtons);
 		
 //		menuPan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		menuPan.add(naslov, BorderLayout.NORTH);
 		menuPan.add(recepti, BorderLayout.CENTER);
-		menuPan.add(sortiranje, BorderLayout.SOUTH);
+		menuPan.add(pretraga, BorderLayout.SOUTH);
 
 //		panCenter.add(menuPan);
 
+//		//add(panCenter);
+
+		/**
+		 * main window table
+		 */
+		
+		JPanel tableSearchPan = new JPanel();
+		tableSearchPan.setBackground(new Color(230, 255, 251));
+	
+		panCenter.add(menuPan, BorderLayout.NORTH);
+		panCenter.add(tableSearchPan, BorderLayout.CENTER);
+		
+		tableSearchPan.setLayout(new BorderLayout());
+
+		showTablePanel(tableSearchPan);
+	}
+
+	private void showTablePanel(JPanel tableSearchPan) {
+		JPanel searchPan = new JPanel();
+		searchPan.setBackground(new Color(230, 255, 251));
+		//searchPan.setPreferredSize(new Dimension(20, 180));
+		JTextField searchTxt = new JTextField(30);
+		searchTxt.setFont(new Font("Ariel", 0, 20));
+		searchPan.setLayout(new FlowLayout(FlowLayout.LEFT));
+		searchPan.add(searchTxt);
+		
 		JPanel tablePan = new JPanel();
 		tablePan.setBackground(new Color(230, 255, 251));
 
-		panCenter.add(menuPan, BorderLayout.NORTH);
-		panCenter.add(tablePan, BorderLayout.CENTER);
-
-		// add(panCenter);
-
-		showTablePanel(tablePan);
-	}
-
-	/**
-	 * main window table
-	 */
-
-	private void showTablePanel(JPanel tablePan) {
-		String column[] = { "Sifra", "Lekar", "Datum i vreme" };
-		String data[][] = { { "1021145", "Petar Arsic", "06.03.2020.  14:49" },
-				{ "1325153", "Tijana Matic", "24.05.2020.  07:51" },
-				{ "1749372", "Sara Simovic", "22.07.2019.  15:27" },
-				{ "2149375", "Marija Jovanovic", "08.06.2020.  11:31" },
-				{ "2619384", "Pavle Vojvodic", "18.08.2019.  12:20" },
-				{ "2857193", "Marina Vukotic", "28.04.2020.  18:06" },
-				{ "3026210", "Sara Nedovic", "24.08.2019.  16:12" }, 
-				{ "3321875", "Petar Arsic", "13.02.2020.  13:36" },
-				{ "3325483", "Vasilije Ilic", "15.05.2020.  11:08" },
-				{ "5193728", "Aleksandar Maric", "14.09.2019.  17:19" },
-				{ "5418673", "Igor Janjic", "30.10.2019.  19:25" },
-				{ "5974216", "Aleksandar Petrovic", "31.03.2020.  20:43" },
-				{ "6538147", "Milan Adamovic", "24.11.2019.  09:16" },
-				{ "6724933", "Pavle Savic", "07.02.2020.  10:52" },
-				{ "6967825", "Helena Velickovic", "01.04.2020.  23:30" },
-				{ "8468571", "Marija Jovanovic", "27.01.2020.  23:55" } };
-
+		String column[] = { "Sifra", "Lekar", "JMBG", "Lek" };
+		String data[][] = { { "1021145", "Petar Arsic", "3004962724819", "Amoksicilin" },
+				{ "1325153", "Tijana Matic", "2405986075118", "Hemomycin" },
+				{ "1749372", "Sara Simovic", "2207200915274", "Propafen" },
+				{ "2149375", "Marija Jovanovic", "0806196711318", "Bactrim" },
+				{ "2619384", "Pavle Vojvodic", "1808998122043", "Eritromicin" },
+				{ "2857193", "Marina Vukotic", "2804970002332", "Milenol" },
+				{ "3026210", "Sara Nedovic", "2408959161274", "Ciprocinal" }, 
+				{ "3321875", "Petar Arsic", "0408997725036", "Palitrex" },
+				{ "3325483", "Vasilije Ilic", "1505948110855", "Madopar" },
+				{ "5193728", "Aleksandar Maric", "1409959171930", "Spalmotil" },
+				{ "5418673", "Igor Janjic", "3010005190025", "Cetirizin" },
+				{ "5974216", "Aleksandar Petrovic", "3103984002340", "Daktanol" },
+				{ "6538147", "Milan Adamovic", "2411991090716", "Methyldopa" },
+				{ "6724933", "Pavle Savic", "0702972011052", "Iruzid" },				
+				{ "6967825", "Helena Velickovic", "0104959233015", "Revatio" },
+				{ "8468571", "Marija Jovanovic", "2701997082355", "Panklav" } };
+		
 		JTable table = new JTable(data, column);
 		table.setRowHeight(40);	
 		table.setFont(new Font("Verdana", Font.PLAIN, 17));
 		
 		JScrollPane scroll = new JScrollPane(table);
-	    scroll.setPreferredSize(new Dimension(1100, 500));
+		scroll.setPreferredSize(new Dimension(1100, 450));
     
 		TableColumnModel columnModel = table.getColumnModel();
-		columnModel.getColumn(0).setPreferredWidth(100);
-		columnModel.getColumn(1).setPreferredWidth(600);
-		columnModel.getColumn(2).setPreferredWidth(150);
+		columnModel.getColumn(0).setPreferredWidth(200);
+		columnModel.getColumn(1).setPreferredWidth(300);
+		columnModel.getColumn(2).setPreferredWidth(200);
+		columnModel.getColumn(3).setPreferredWidth(200);
 		
 		tablePan.add(scroll);
-//		tablePan.add(table, BorderLayout.SOUTH);
+
+		tableSearchPan.add(searchPan, BorderLayout.PAGE_START);
+		tableSearchPan.add(tablePan, BorderLayout.CENTER);
 	}
 
 }
