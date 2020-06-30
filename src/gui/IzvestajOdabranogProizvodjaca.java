@@ -171,93 +171,96 @@ public class IzvestajOdabranogProizvodjaca extends JFrame {
 
 		tableSearchPan.setLayout(new BorderLayout());
 
-		showTablePanel(tableSearchPan);
+		JPanel searchPan = new JPanel();
+		searchPan.setBackground(new Color(230, 255, 251));
+		
+//		showTablePanel(tableSearchPan);
 	}
 
 	/**
 	 * main window table
 	 */
 
-	private void showTablePanel(JPanel tableSearchPan) {
-
-		JPanel searchPan = new JPanel();
-		searchPan.setBackground(new Color(230, 255, 251));
-		JLabel searchProiz = new JLabel("Proizvodjac :");
-		searchProiz.setFont(new Font("Ariel", 0, 20));
-		searchPan.add(searchProiz);
-		// searchPan.setPreferredSize(new Dimension(20, 180));
-		JTextField searchTxt = new JTextField(30);
-		searchTxt.setFont(new Font("Ariel", 0, 20));
-		searchPan.setLayout(new FlowLayout(FlowLayout.LEFT));
-		searchPan.add(searchTxt);
-		
-		JTable table;
-
-		JPanel tablePan = new JPanel();
-		tablePan.setBackground(new Color(230, 255, 251));
-
-		Object column[] = { "Ime", "Sifra", "Proizvodjac", "Recept", "Cena", "Kolicina", "Zarada" };
-		Object data[][] = { { "Andol", "BR3348G", "Pliva a.d.", false, "220 RSD", "17", "" },
-				{ "Omeprazol", "A02BC01", "Zdravlje a.d.", false, "350 RSD", "7", "" },
-				{ "Riftan", "A07AA09", "HEMOFARM A.D.", true, "720 RSD", "3", "" },
-				{ "Vesicare", "G04BD08", "Astellas d.o.o.", false, "1,545 RSD", "2", "" },
-				{ "Serlift", "NO6AB06", "Medico Uno", false, "354 RSD", "8", "" },
-				{ "Itanem", "J01DHO2", "GALENIKA A.D.", false, "6,552 RSD", "4", "" },
-				{ "Brufen", "M01AE01", "HEMOFARM A.D.", false, "172 RSD", "25", "" },
-				{ "Kafetin", "N02BE51", "ALKALOD A.D.", false, "205 RSD", "39", "" },
-				{ "Alfacet", "D07AC13", "GALENIKA A.D.", true, "863 RDS", "12", "" },
-				{ "Glikosan", "R06AX27", "Slaviamed a.d.", true, "220 RSD", "6", "" },
-				{ "Amoksicilin", "J01CA04 ", "FARMALOGIST D.O.O.", false, "145 RSD", "6", "" },
-				{ "Nexium", "A02BC05", "AastraZeneca d.o.o.", false, "500 RSD", "14", "" },
-				{ "Logest", "G03AA10", "BAYER D.O.O.", "", "478 RSD", false, "11", "" },
-
-		};
-
-		DefaultTableModel model = new DefaultTableModel(data, column);
-
-		table = new JTable(model) {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public Class getColumnClass(int column) {
-				switch (column) {
-				case 0:
-					return String.class;
-				case 1:
-					return String.class;
-				case 2:
-					return String.class;
-				case 3:
-					return Boolean.class;
-				case 4:
-					return String.class;
-				case 5:
-					return String.class;
-				default:
-					return String.class;
-				}
-			}
-		};
-		
-		table.setRowHeight(40);
-		table.setFont(new Font("Verdana", Font.PLAIN, 17));
-
-		JScrollPane scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(1100, 450));
-
-		TableColumnModel columnModel = table.getColumnModel();
-		columnModel.getColumn(0).setPreferredWidth(300);
-		columnModel.getColumn(1).setPreferredWidth(300);
-		columnModel.getColumn(2).setPreferredWidth(200);
-		columnModel.getColumn(3).setPreferredWidth(80);
-		columnModel.getColumn(4).setPreferredWidth(150);
-		columnModel.getColumn(5).setPreferredWidth(150);
-		columnModel.getColumn(6).setPreferredWidth(150);
-
-		tablePan.add(scroll);
-
-		tableSearchPan.add(searchPan, BorderLayout.PAGE_START);
-		tableSearchPan.add(tablePan, BorderLayout.CENTER);
-	}
+//	private void showTablePanel(JPanel tableSearchPan) {
+//
+//		JPanel searchPan = new JPanel();
+//		searchPan.setBackground(new Color(230, 255, 251));
+//		JLabel searchProiz = new JLabel("Proizvodjac :");
+//		searchProiz.setFont(new Font("Ariel", 0, 20));
+//		searchPan.add(searchProiz);
+//		// searchPan.setPreferredSize(new Dimension(20, 180));
+//		JTextField searchTxt = new JTextField(30);
+//		searchTxt.setFont(new Font("Ariel", 0, 20));
+//		searchPan.setLayout(new FlowLayout(FlowLayout.LEFT));
+//		searchPan.add(searchTxt);
+//		
+//		JTable table;
+//
+//		JPanel tablePan = new JPanel();
+//		tablePan.setBackground(new Color(230, 255, 251));
+//
+//		Object column[] = { "Ime", "Sifra", "Proizvodjac", "Recept", "Cena", "Kolicina", "Zarada" };
+//		Object data[][] = { { "Andol", "BR3348G", "Pliva a.d.", false, "220 RSD", "17", "" },
+//				{ "Omeprazol", "A02BC01", "Zdravlje a.d.", false, "350 RSD", "7", "" },
+//				{ "Riftan", "A07AA09", "HEMOFARM A.D.", true, "720 RSD", "3", "" },
+//				{ "Vesicare", "G04BD08", "Astellas d.o.o.", false, "1,545 RSD", "2", "" },
+//				{ "Serlift", "NO6AB06", "Medico Uno", false, "354 RSD", "8", "" },
+//				{ "Itanem", "J01DHO2", "GALENIKA A.D.", false, "6,552 RSD", "4", "" },
+//				{ "Brufen", "M01AE01", "HEMOFARM A.D.", false, "172 RSD", "25", "" },
+//				{ "Kafetin", "N02BE51", "ALKALOD A.D.", false, "205 RSD", "39", "" },
+//				{ "Alfacet", "D07AC13", "GALENIKA A.D.", true, "863 RDS", "12", "" },
+//				{ "Glikosan", "R06AX27", "Slaviamed a.d.", true, "220 RSD", "6", "" },
+//				{ "Amoksicilin", "J01CA04 ", "FARMALOGIST D.O.O.", false, "145 RSD", "6", "" },
+//				{ "Nexium", "A02BC05", "AastraZeneca d.o.o.", false, "500 RSD", "14", "" },
+//				{ "Logest", "G03AA10", "BAYER D.O.O.", "", "478 RSD", false, "11", "" },
+//
+//		};
+//
+//		DefaultTableModel model = new DefaultTableModel(data, column);
+//
+//		table = new JTable(model) {
+//
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public Class getColumnClass(int column) {
+//				switch (column) {
+//				case 0:
+//					return String.class;
+//				case 1:
+//					return String.class;
+//				case 2:
+//					return String.class;
+//				case 3:
+//					return Boolean.class;
+//				case 4:
+//					return String.class;
+//				case 5:
+//					return String.class;
+//				default:
+//					return String.class;
+//				}
+//			}
+//		};
+//		
+//		table.setRowHeight(40);
+//		table.setFont(new Font("Verdana", Font.PLAIN, 17));
+//
+//		JScrollPane scroll = new JScrollPane(table);
+//		scroll.setPreferredSize(new Dimension(1100, 450));
+//
+//		TableColumnModel columnModel = table.getColumnModel();
+//		columnModel.getColumn(0).setPreferredWidth(300);
+//		columnModel.getColumn(1).setPreferredWidth(300);
+//		columnModel.getColumn(2).setPreferredWidth(200);
+//		columnModel.getColumn(3).setPreferredWidth(80);
+//		columnModel.getColumn(4).setPreferredWidth(150);
+//		columnModel.getColumn(5).setPreferredWidth(150);
+//		columnModel.getColumn(6).setPreferredWidth(150);
+//
+//		tablePan.add(scroll);
+//
+//		tableSearchPan.add(searchPan, BorderLayout.PAGE_START);
+//		tableSearchPan.add(tablePan, BorderLayout.CENTER);
+//	}
 }

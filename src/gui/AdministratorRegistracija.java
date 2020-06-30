@@ -219,11 +219,11 @@ public class AdministratorRegistracija extends JFrame {
 		lblTipKor.setFont(new Font("Ariel", 0, 30));
 		pnlTipKor.add(lblTipKor);
 
-		JRadioButton radBtn1 = new JRadioButton("Tip korisnika");
+		JRadioButton radBtn1 = new JRadioButton("Lekar");
 		radBtn1.setFont(new Font("Arial", 0, 25));
 		radBtn1.setBackground(new Color(230, 255, 251));
 
-		JRadioButton radBtn2 = new JRadioButton("Prezime korisnika");
+		JRadioButton radBtn2 = new JRadioButton("Apotekar");
 		radBtn2.setFont(new Font("Arial", 0, 25));
 		radBtn2.setBackground(new Color(230, 255, 251));
 
